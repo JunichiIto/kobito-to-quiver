@@ -101,6 +101,8 @@ $ cp -rf ./qvnotebook/(対象のqvnotebook).qvnotebook ~/Library/Containers/com.
 
 Quiverを起動し、インポートした記事のタイトルやタグが更新されていることを確認する。
 
+<img width="1769" alt="screen shot 2017-12-30 at 18 58 08" src="https://user-images.githubusercontent.com/1148320/34453281-851a0258-ed93-11e7-98da-84f134a3fa97.png">
+
 ## License
 
 MIT License.
