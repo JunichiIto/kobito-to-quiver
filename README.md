@@ -1,6 +1,8 @@
 # kobito-to-quiver
 
-Migrate Kobito data to Quiver
+Migrate Kobito data to Quiver.
+
+KobitoのデータをQuiverに移行するためのサポートツールです。
 
 ## Setup
 
@@ -20,7 +22,7 @@ $ bundle install
 ### Kobitoのdbファイルをdbフォルダにコピーする
 
 ```
-cp ~/Library/Containers/com.qiita.Kobito/Data/Library/Kobito/Kobito.db ./db
+$ cp ~/Library/Containers/com.qiita.Kobito/Data/Library/Kobito/Kobito.db ./db
 ```
 
 ### KobitoのデータをMarkdownとしてエクスポートする
@@ -56,7 +58,7 @@ Quiverを起動 &gt; File &gt; Import &gt; Markdown で、上で出力したMark
 
 ### Quiverのqvnotebookディレクトリをコピーする
 
-上でインポートしたNotebookを確認する。（おそらく作成日時が一番若いqvnotebookディレクトリがそれ）
+上でインポートしたNotebookを確認する。（以下の例で言うと、"D61E1411"で始まる作成日時が一番若いqvnotebookディレクトリがそれ）
 
 ```
 $ ls -la ~/Library/Containers/com.happenapps.Quiver/Data/Library/Application\ Support/Quiver/Quiver.qvlibrary
