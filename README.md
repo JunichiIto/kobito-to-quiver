@@ -19,7 +19,7 @@ $ bundle install
 
 ## 手順
 
-### Kobitoのdbファイルをdbフォルダにコピーする
+### Kobitoのdbファイルをdbディレクトリにコピーする
 
 ```
 $ cp ~/Library/Containers/com.qiita.Kobito/Data/Library/Kobito/Kobito.db ./db
@@ -27,7 +27,7 @@ $ cp ~/Library/Containers/com.qiita.Kobito/Data/Library/Kobito/Kobito.db ./db
 
 ### KobitoのデータをMarkdownとしてエクスポートする
 
-以下のコマンドを実行するとoutputフォルダに記事がMarkdownファイルとしてエクスポートされる。
+以下のコマンドを実行するとoutputディレクトリに記事がMarkdownファイルとしてエクスポートされる。
 
 ```
 $ rake export
