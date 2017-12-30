@@ -98,3 +98,7 @@ $ cp -rf ./qvnotebook/(対象のqvnotebook).qvnotebook ~/Library/Containers/com.
 ### 移行が成功したことを確認する
 
 Quiverを起動し、インポートした記事のタイトルやタグが更新されていることを確認する。
+
+## License
+
+MIT License.
