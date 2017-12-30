@@ -23,7 +23,6 @@ class KobitoItem
         ZIN_TRASH IS NULL
       ORDER BY
         ZUPDATED_AT DESC
-      LIMIT 10
       SQL
       run_query(sql).map { |row|
         item = KobitoItem.new

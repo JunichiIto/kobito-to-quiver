@@ -1,5 +1,5 @@
 require 'fileutils'
-require '../lib/kobito_item'
+require './lib/kobito_item'
 
 class KobitoExporter
   OUTPUT_DIR = File.expand_path('../../output/', __FILE__).freeze
@@ -29,5 +29,3 @@ class KobitoExporter
     FileUtils.mkdir(OUTPUT_DIR)
   end
 end
-
-KobitoExporter.new.run

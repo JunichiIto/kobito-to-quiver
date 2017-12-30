@@ -1,3 +1,6 @@
-/db
-/output
-/qvnotebook
+db/*
+qvnotebook/*
+output/*
+
+!db/.keep
+!qvnotebook/.keep

@@ -1,10 +1,10 @@
 require 'pathname'
 require 'json'
-require '../lib/kobito_item'
+require './lib/kobito_item'
 
 class QuiverUpdater
-  NOTEBOOK_DIR = '/Users/jit/Desktop/6AB38D2B-32F6-47BE-9F46-96A6E6997E02.qvnotebook'
-  NOTEBOOK_DIR = File.expand_path('../../qvnotebook', __FILE__)
+  NOTEBOOK_DIR = File.expand_path('../../qvnotebook', __FILE__).freeze
+
   def run
     pattern = File.join(NOTEBOOK_DIR, '**/*.qvnote')
     Dir.glob(pattern).each do |dir|
@@ -69,5 +69,3 @@ class QuiverUpdater
     @kobito_items ||= KobitoItem.extract_items
   end
 end
-
-QuiverUpdater.new.run
