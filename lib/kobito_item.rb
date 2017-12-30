@@ -8,21 +8,21 @@ class KobitoItem
   class << self
     def extract_items
       sql = <<~SQL
-      SELECT
-        Z_PK,
-        ZTITLE,
-        ZIN_TRASH,
-        ZRAW_BODY,
-        ZCREATED_AT,
-        ZUPDATED_AT,
-        ZUPDATED_AT_ON_QIITA,
-        ZURL
-      FROM
-        ZITEM
-      WHERE
-        ZIN_TRASH IS NULL
-      ORDER BY
-        ZUPDATED_AT DESC
+        SELECT
+          Z_PK,
+          ZTITLE,
+          ZIN_TRASH,
+          ZRAW_BODY,
+          ZCREATED_AT,
+          ZUPDATED_AT,
+          ZUPDATED_AT_ON_QIITA,
+          ZURL
+        FROM
+          ZITEM
+        WHERE
+          ZIN_TRASH IS NULL
+        ORDER BY
+          ZUPDATED_AT DESC
       SQL
       run_query(sql).map { |row|
         item = KobitoItem.new
@@ -43,14 +43,14 @@ class KobitoItem
 
     def find_tags(pk)
       sql = <<~SQL
-      SELECT ZNAME
-      FROM ZITEM
-        INNER JOIN Z_2TAGS
-          ON ZITEM.Z_PK = Z_2TAGS.Z_2ITEMS
-        INNER JOIN ZTAG
-          ON Z_2TAGS.Z_3TAGS = ZTAG.Z_PK
-      WHERE
-        ZITEM.Z_PK = ?
+        SELECT ZNAME
+        FROM ZITEM
+          INNER JOIN Z_2TAGS
+            ON ZITEM.Z_PK = Z_2TAGS.Z_2ITEMS
+          INNER JOIN ZTAG
+            ON Z_2TAGS.Z_3TAGS = ZTAG.Z_PK
+        WHERE
+          ZITEM.Z_PK = ?
       SQL
       run_query(sql, pk).each do |row|
         yield row['ZNAME']
