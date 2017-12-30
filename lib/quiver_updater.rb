@@ -16,35 +16,30 @@ class QuiverUpdater
   private
 
   def update_meta_json(dir)
-    json_path = File.join(dir, 'meta.json')
-    json_data = open(json_path) do |io|
-      JSON.load(io)
+    update_json(dir, 'meta.json') do |json_data, item|
+      json_data['title'] = item.title
+      json_data['created_at'] = item.created_at.to_i
+      json_data['updated_at'] = item.updated_at.to_i
+      json_data['tags'] = item.tags
+      if item.qiita_published?
+        json_data['tags'] << 'qiita-published'
+      end
     end
-    id = json_data['title']
-    puts "updating meta.json / #{id}"
-    if id !~ /^\d+$/
-      puts 'skip.'
-      return
-    end
-    item = kobito_items[id.to_i]
-    if item.nil?
-      puts 'not found.'
-      return
-    end
-    json_data['title'] = item.title
-    json_data['created_at'] = item.created_at.to_i
-    json_data['updated_at'] = item.updated_at.to_i
-    json_data['tags'] = item.tags
-    write_json(json_path, json_data)
   end
 
   def update_content_json(dir)
-    json_path = File.join(dir, 'content.json')
+    update_json(dir, 'content.json') do |json_data, item|
+      json_data['title'] = item.title
+    end
+  end
+
+  def update_json(dir, file_name)
+    json_path = File.join(dir, file_name)
     json_data = open(json_path) do |io|
       JSON.load(io)
     end
     id = json_data['title']
-    puts "updating content.json / #{id}"
+    puts "updating #{file_name} / #{id}"
     if id !~ /^\d+$/
       puts 'skip.'
       return
@@ -54,7 +49,7 @@ class QuiverUpdater
       puts 'not found.'
       return
     end
-    json_data['title'] = item.title
+    yield json_data, item
     write_json(json_path, json_data)
   end
 

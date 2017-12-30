@@ -82,6 +82,10 @@ class KobitoItem
     @tags = []
   end
 
+  def qiita_published?
+    !!url
+  end
+
   def temp?
     @tags.include?('temp')
   end
