@@ -1,15 +1,30 @@
 require 'sqlite3'
+require 'fileutils'
 require '../lib/kobito_item'
 class KobitoToQuiver
+  OUTPUT_DIR = File.expand_path('../../output/', __FILE__).freeze
+
   def run
     items = find_items
-    items.each do |item|
-      puts item
-    end
+    output_files(items)
   end
 
   def output_files(items)
+    init_dir
+    items.each do |pk, item|
+      puts "#{pk} / #{item.title}"
+      next if item.temp?
+      path = File.join(OUTPUT_DIR, "#{pk}.md")
+      File.write(path, item.body)
+    end
+  end
 
+  def init_dir
+    if File.exists?(OUTPUT_DIR)
+      puts "delete #{OUTPUT_DIR}"
+      FileUtils.rm_rf(OUTPUT_DIR)
+    end
+    FileUtils.mkdir(OUTPUT_DIR)
   end
 
   def find_items
@@ -31,19 +46,19 @@ class KobitoToQuiver
         ZUPDATED_AT DESC
       LIMIT 10
     SQL
-    run_query(sql).map do |row|
+    run_query(sql).map { |row|
       item = KobitoItem.new
       item.pk = row['Z_PK']
       item.raw_created_at = row['ZCREATED_AT']
       item.raw_updated_at = row['ZUPDATED_AT']
-      item.body = row['ZRAW_BODY']
+      item.raw_body = row['ZRAW_BODY']
       item.title = row['ZTITLE']
       item.url = row['ZURL']
       find_tags(item.pk) do |tag|
         item.tags << tag
       end
-      item
-    end
+      [item.pk, item]
+    }.to_h
   end
 
   def find_tags(pk)
