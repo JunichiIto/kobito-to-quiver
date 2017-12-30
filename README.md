@@ -30,7 +30,7 @@ $ cp ~/Library/Containers/com.qiita.Kobito/Data/Library/Kobito/Kobito.db ./db
 以下のコマンドを実行するとoutputディレクトリに記事がMarkdownファイルとしてエクスポートされる。
 
 ```
-$ rake export
+$ bundle exec rake export
 ```
 
 なお、記事に`temp`というタグが付いていると出力をスキップするようにしている。
@@ -84,7 +84,7 @@ $ cp -r ~/Library/Containers/com.happenapps.Quiver/Data/Library/Application\ Sup
 以下のコマンドを実行すると、各記事のタイトルとタグが更新される。
 
 ```
-$ rake update_qvnotebook
+$ bundle exec rake update_qvnotebook
 ```
 
 ### qvnotebookディレクトリを元に戻す
